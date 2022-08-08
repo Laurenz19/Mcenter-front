@@ -1,93 +1,29 @@
 <template>
-    <div class="app-container">
-        <div class="navbar">
-            <div class="navbar-content">
-                <div class="nav_title">
-                    <i class="uil uil-hospital-square-sign"></i> 
-                    <ul>
-                        <li class="li1">Visite</li>
-                        <li class="li2">Medical</li>
-                    </ul>
-                </div>
-                <div class="nav-menu">
-                    <div class="menu-item active">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-                     <div class="menu-item">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-                     <div class="menu-item">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-                     <div class="menu-item">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-                     <div class="menu-item">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-                     <div class="menu-item">
-                        <span class="icon">
-                             <i class="uil uil-hospital-square-sign"></i> 
-                        </span>
-                        <span class="label">
-                            Dashboard
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="header">
-                <div class="title">
-                    Dashboard
-                </div>
-                <div class="breadcrumb">
-                    Home / link_1 / link_2
-                </div>
-            </div>
+    <div class="app_container">
+        <app-navbar></app-navbar>
+        <div class="main_container">
+           <app-header></app-header>
             <div class="app">
-                <h1>Default form</h1>
-                <form action="">
-                  <input type="text">
-                </form>
+              <slot name="app_content"></slot>
             </div>
         </div>
     </div>
 </template>
 <script>
+import HeaderComponentVue from '@/components/HeaderComponent.vue'
+import NavbarComponentVue from '@/components/NavbarComponent.vue'
+
    export default {
-    
+    name:"DefaultPage",
+    components:{
+        'app-navbar':NavbarComponentVue,
+        'app-header': HeaderComponentVue
+    }
    }
 </script>
 
-<style lang="scss" scoped>
-    .app-container{
+<style lang="scss">
+    .app_container{
         display: flex;
         justify-content: space-between;
 
@@ -97,8 +33,10 @@
             // border-right: 1px solid grey;
             box-shadow: 3px 3px 15px 0px rgba(42, 43, 53, 0.1);
 
-            .navbar-content{
+            .navbar_content{
                 height: 100vh;
+                width: 100%;
+                display: block;
             
                 .nav_title{
                     display: flex;
@@ -124,26 +62,28 @@
                     }
                 }
                 
-                .nav-menu{
+                .nav_menu{
                     position: relative;
                     top:60px;
+                    display: flex;
+                    flex-direction: column;
 
-                    .menu-item{
-                        padding: 15px 15px  10px 20px;
-                        width: 65%;
+                    .menu_item{
+                        padding: 5px 5px  5px 5px;
+                        width: 80%;
                         height: 30px;
                         margin: 20px auto;
                         cursor: pointer;
                         border-radius: 14px;
 
-                        .icon{
+                        .menu_icon{
                             padding: 8px 8px;
                             background-color: white;
                             border-radius: 8px;
                             box-shadow: 3px 3px 15px 0px rgba(42, 43, 53, 0.1);
                         }
 
-                        .label{
+                        .menu_label{
                             font-size: 16px;
                             color: #778D98;
                             margin: 0px 15px
@@ -158,21 +98,21 @@
                     .active{
                         // background-color: white;
 
-                        .icon{
+                        .menu_icon{
                             background-color: #02718A;
                             color: white;
                         }
 
-                        .label{
+                        .menu_label{
                             color: #3f5053;
                             font-weight: bold;
                         }
-                    }
+                    } 
                 }
             }
         }
 
-        .container{
+        .main_container{
             flex-basis: 1000px;
             flex-grow: 4;
 
@@ -196,7 +136,7 @@
                     font-size: 18px;
                 }
 
-                .breadcrumb{
+                .app_breadcrumb{
                     position: relative;
                     align-self: flex-end;
                     margin: 20px;
@@ -214,20 +154,31 @@
     }
 
 
-    @media screen and (max-width: 1450px){
-        .menu-item{
-            .icon{
+    @media screen and (max-width: 1480px){
+        .menu_item{
+            width:50% !important;
+            margin: auto;
+            .menu_icon{
                margin: auto;
                display: block;
                text-align: center;
             }
-            .label{
+            .menu_label{
                 display: none;
             }
         }
 
-        .active{
-        //    background-color: none !important;
+        .nav_title{
+            i{      
+                font-size: 25px;
+            }
+            ul{
+                font-size: 15px;
+
+                .li2{
+                    font-size: 10px;
+               }
+            }
         }
     }
    
