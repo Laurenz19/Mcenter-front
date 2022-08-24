@@ -1,9 +1,9 @@
 <template>
    <div class="header">
         <div class="title">
-                    Dashboard
+            {{title}}
         </div>
-        <app-breadcrumb></app-breadcrumb>
+        <app-breadcrumb :title="title"></app-breadcrumb>
     </div> 
 </template>
 
@@ -14,6 +14,9 @@ import BreadcrumbComponentVue from './BreadcrumbComponent.vue'
     name:"HeaderComponent",
     components:{
         'app-breadcrumb':BreadcrumbComponentVue
+    },
+    props:{
+        title:String
     }
    }
 </script>

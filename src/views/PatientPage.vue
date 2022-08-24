@@ -1,5 +1,5 @@
 <template>
-    <dashboard>
+    <dashboard title="Patient">
         <template #app_content>
     
           <app-filter :data="patients" @updateDataSearch="(search)=> getuserSearch(search)">
@@ -8,21 +8,7 @@
             </template>
           </app-filter>
           <div class="app_card_list">
-            <div class="card_item" v-for="patient in visibleData" :key="patient.id">
-                <div class="item_content">
-                    <img src="../assets/img/avatar.jpg"/>
-                    <div class="user_info">
-                        <span class="name">{{patient.firstname}} {{patient.lastname}}</span>
-                        <span>{{patient.gender}}</span>
-                        <span>{{patient.address}}</span>
-                    </div>
-                </div>
-                 <hr>
-                <div class="actions">
-                    <i class="uil uil-edit" @click="editData(patient)"></i>
-                    <i class="uil uil-trash" @click="deleteData(patient.id)"></i>
-                </div>
-            </div>
+            <PatientCard v-for="patient in visibleData" :patient="patient" :key="patient.id" @edit="editData(patient)" @delete="deleteData(patient.id)"/>
           </div>
           <app-pagination :config="paginationConfig" :color="colors.color_3" @updatePage="updatePage"></app-pagination>
           <app-modal :open="isModalOpen" @close="isModalOpen = false" @save="toggleSaveData"
@@ -71,15 +57,17 @@ import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
 import useNotification from '@/composable/useNotification';
+import PatientCard from '@/components/PatientCard.vue';
 
    export default {
     name:"PatientPage",
     components:{
-        'dashboard': DashboardPage,
-        'app-filter': FilterSearchComponentVue,
-        'app-pagination': PaginationComponentVue,
-        'app-modal': ModalComponentVue
-    },
+    "dashboard": DashboardPage,
+    "app-filter": FilterSearchComponentVue,
+    "app-pagination": PaginationComponentVue,
+    "app-modal": ModalComponentVue,
+    PatientCard
+},
     setup(){
 
 

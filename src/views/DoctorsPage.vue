@@ -1,5 +1,5 @@
 <template>
-    <dashboard>
+    <dashboard title="Medecin">
         <template #app_content>
     
           <app-filter :data="doctors" @updateDataSearch="(search)=> getuserSearch(search)">
@@ -8,21 +8,7 @@
             </template>
           </app-filter>
           <div class="app_card_list">
-            <div class="card_item" v-for="medecin in visibleData" :key="medecin.id">
-                <div class="item_content">
-                    <img src="../assets/img/avatar.jpg"/>
-                    <div class="user_info">
-                        <span class="name">{{medecin.firstname}} {{medecin.lastname}}</span>
-                        <span>{{medecin.matricule}}</span>
-                        <span>{{medecin.grade}}</span>
-                    </div>
-                </div>
-                 <hr>
-                <div class="actions">
-                    <i class="uil uil-edit" @click="editData(medecin)"></i>
-                    <i class="uil uil-trash" @click="deleteData(medecin.id)"></i>
-                </div>
-            </div>
+            <DoctorsCardVue v-for="medecin in visibleData" :key="medecin.id" :medecin="medecin" @edit="editData(medecin)" @delete="deleteData(medecin.id)"/>
           </div>
           <app-pagination :config="paginationConfig" :color="colors.color_3" @updatePage="updatePage"></app-pagination>
           <app-modal :open="isModalOpen" @close="isModalOpen = false" @save="toggleSaveData"
@@ -66,15 +52,18 @@ import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
 import useNotification from '../composable/useNotification'
+import DoctorsCardVue from '@/components/DoctorsCard.vue';
+
 
    export default {
     name:"DoctorsPage",
     components:{
-        'dashboard': DashboardPage,
-        'app-filter': FilterSearchComponentVue,
-        'app-pagination': PaginationComponentVue,
-        'app-modal': ModalComponentVue
-    },
+    "dashboard": DashboardPage,
+    "app-filter": FilterSearchComponentVue,
+    "app-pagination": PaginationComponentVue,
+    "app-modal": ModalComponentVue,
+    DoctorsCardVue,
+},
     setup(){
 
 

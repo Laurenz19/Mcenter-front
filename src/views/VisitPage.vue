@@ -1,5 +1,5 @@
 <template>
-    <dashboard>
+    <dashboard title="Visite">
         <template #app_content>
     
           <app-filter :data="visits" @updateDataSearch="(search)=> getuserSearch(search)">
@@ -8,31 +8,7 @@
             </template>
           </app-filter>
           <div class="app_card_list">
-            <div class="visit_card" v-for="visit in visibleData" :key="visit.id">
-                <div class="item"><span>{{moment(visit.date).format("MMMM Do YYYY")}}</span></div>
-                <div class="visitcontainer"> 
-                    <div class="field">
-                       <div class="title">Doctor</div>
-                       <div class="item"><label for="">N°:</label> <span>{{visit.medecin.matricule}}</span></div>
-                       <div class="item"><label for="">Name:</label> <span>{{visit.medecin.firstname}} {{visit.medecin.lastname}}</span></div>
-                    </div> 
-                   
-                    <div class="field">
-                       <div class="title">Patient</div>
-                       <div class="item"><span>{{visit.patient.firstname}} {{visit.patient.lastname}}</span></div>
-                       <div class="item">
-                          <span v-if="visit.patient.gender == 'M'">Homme</span>
-                          <span v-if="visit.patient.gender == 'F'">Femme</span>
-                       </div>
-                       <div class="item"><span>{{visit.patient.address}} </span></div>
-                    </div>
-                </div>
-                <hr>
-                <div class="actions">
-                   <i class="uil uil-edit" @click="editData(visit)"></i>
-                    <i class="uil uil-trash" @click="deleteData(visit.id)"></i>
-                </div>
-            </div>
+            <VisitCard v-for="visit in visibleData" :key="visit.id" :visit="visit" @edit="editData(visit)" @delete="deleteData(visit.id)"/>
           </div>
           <app-modal :open="isModalOpen" @close="isModalOpen = false" @save="toggleSaveData"
             size="500px" :color="colors.color_1"
@@ -77,15 +53,17 @@ import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
 import useNotification from '@/composable/useNotification';
+import VisitCard from '@/components/VisitCard.vue';
 
    export default {
     name:"VisitPage",
     components:{
-        'dashboard': DashboardPage,
-        'app-filter': FilterSearchComponentVue,
-        'app-pagination': PaginationComponentVue,
-        'app-modal': ModalComponentVue
-    },
+    "dashboard": DashboardPage,
+    "app-filter": FilterSearchComponentVue,
+    "app-pagination": PaginationComponentVue,
+    "app-modal": ModalComponentVue,
+    VisitCard
+},
     setup(){
 
 

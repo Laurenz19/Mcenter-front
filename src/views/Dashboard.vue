@@ -2,7 +2,7 @@
     <div class="app_container">
         <app-navbar></app-navbar>
         <div class="main_container">
-           <app-header></app-header>
+           <app-header :title="title"></app-header>
             <div class="app">
               <slot name="app_content"></slot>
             </div>
@@ -21,6 +21,9 @@ import { inject } from 'vue'
         'app-navbar':NavbarComponentVue,
         'app-header': HeaderComponentVue
     }, 
+    props:{
+        title:String
+    },
     setup(){
        let globalVar=inject('globalVariable')
         console.log(globalVar)
