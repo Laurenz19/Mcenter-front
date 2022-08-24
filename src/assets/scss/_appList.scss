@@ -1,0 +1,266 @@
+@use "sass:math";
+
+@mixin course_card($type, $card-height, $bg-height) {
+    position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+       
+        margin: auto;
+        margin-bottom: 25px;
+
+        @if  $type == 'list'{
+            width: 85%;
+        } 
+
+        div{
+
+            @if  $type == 'list'{
+                flex-grow: 1;
+                flex-basis: 100%;
+                overflow: hidden;
+            } @else{
+                flex-basis:325px;
+                flex-grow: 0;
+            }
+
+
+            .course-card{
+                // background-color: rgb(255, 251, 251);
+                // box-shadow: $base-box-shadow-1;
+                // border-radius: math.div($base-border-radius,4);
+                @include card();
+                cursor: pointer;
+                // overflow-y: hidden;
+                height: $card-height;
+                
+                // height: 125px;
+                @if  $type == 'list'{
+                    display: flex;
+                }
+
+                .bg{
+                    
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    // background-image: url("/src/assets/img/bglogin.jpg");
+                }
+                .course-background{
+                    overflow: hidden;
+                  
+                    height: $bg-height;
+                    flex-basis: 40%;
+
+                    @if  $type == 'list'{
+                        border-top-left-radius:  math.div($base-border-radius,4);
+                        border-bottom-left-radius:  math.div($base-border-radius,4);
+                    } @else{
+                        border-top-left-radius:  math.div($base-border-radius,4);
+                        border-top-right-radius:  math.div($base-border-radius,4);
+                    }
+
+                    .progression{
+                        position: relative;
+                        font-size: 12px;
+                        top:2px;
+                        font-weight: bold;
+                        // color: white;
+                        // background-color: rgb(0, 167, 153);
+                        width: 75px;
+
+                        border-top-left-radius: math.div($base-border-radius,2);
+                        border-bottom-left-radius: math.div($base-border-radius,2);
+
+                        @if  $type == 'list'{
+                            left: 80%;
+                            padding: 1px 23px 1px 5px;
+                        } @else{
+                            left: 85%;
+                            padding: 1px 23px 1px 5px;
+                        }
+                    }
+                }
+    
+                .course-content{
+                    margin: 15px;
+                    font-size: 11px;
+                    .course-name{
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+    
+                    .course-module{
+                        display: block;
+                        text-transform: uppercase;
+                    }
+
+                    .course-desc{
+                        display: block;
+                        position: relative;
+                        top:0px;
+                        text-align: justify;
+                        margin: 5px auto;
+                        margin-bottom: 10px;
+
+                        overflow: hidden;
+                        height: 50px;
+                    }
+                }
+            }   
+        }
+}
+
+
+.courses-container{
+   position:relative;
+   margin: 0 auto;
+   width: 85%;
+   top:25px;
+   box-sizing: border-box;
+    
+    .title{
+        font-size: 20px;
+    }
+
+    .list-view{
+        @include course_card('list', 120px, 120px);
+    }
+    .card-view{
+        @include course_card('card', 225px, 100px);
+    }
+}
+
+@media screen and (max-width:1392px) {
+    .card-view{
+        div{
+            flex-basis: 300px !important;
+           
+        }
+    }
+}
+
+@media screen and (max-width:1288px) {
+    .card-view{
+        div{
+            flex-basis: 275px !important;
+           
+        }
+    }
+}
+
+// @media screen and (max-width:1231px) {
+//     .list{
+//         div{
+//             flex-basis: 400px !important;
+           
+//         }
+//     }
+// }
+
+@media screen and (max-width:1200px) {
+    .card-view{
+        div{
+            flex-basis: 250px !important;
+           
+        }
+    }
+    .list-view{
+        div{
+            .course-card{
+                .course-background{
+                    .progression{
+                        left: 75% !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1193px) {
+    .card-view{
+        div{
+            flex-basis: 350px !important;
+           
+        }
+    }
+}
+
+@media screen and (max-width:1115px) {
+    .card-view{
+        div{
+            flex-basis: 300px !important;
+           
+        }
+    }
+
+    .list-view{
+        div{
+            .course-card{
+                .course-background{
+                    .progression{
+                        left: 72% !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:958px) {
+    .list-view{
+        width: 100% !important;
+        div{
+            .course-card{
+                .course-background{
+                    flex-basis: 50% !important;
+                    .progression{
+                        left: 65% !important;
+                    }
+                }
+            }
+        }
+    }
+    .card-view{
+        div{
+            flex-basis: 100% !important;
+            overflow: hidden;
+
+            .course-card{
+                height: 125px !important;
+                display: flex;
+                flex-direction: row;
+                width: 100% !important;
+
+                .course-background{
+
+                    height: inherit !important;
+                    flex-basis: 65% !important;
+                    
+                    border-top-right-radius:  0px !important;
+                    border-bottom-left-radius:  math.div($base-border-radius,4);
+
+                    .progression{
+                        left: 73% !important;
+                        padding: 1px 27px 1px 5px !important;
+                    }
+                }
+
+                .course-content{
+                    .course-name{
+                        font-size: 13px;
+                    }  
+                    .course-module{
+                        font-size: 10px;
+                    }
+
+                    .course-desc{
+                        font-size: 12px;
+                        top:0px !important;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+@use "sass:math";
+
+
+.search-app{
+    display: flex;
+    width: 88%;
+    margin: auto;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    background-color: rgb(255, 255, 255);
+    padding: 7px 15px;
+    box-shadow: $base-box-shadow-1;
+    border-radius: math.div($base-border-radius,2);
+    
+
+    .filter{
+        flex-basis: 75px;
+        display: flex;
+        justify-content: flex-start;
+        
+        .card-layout{
+            @include layout_config(25px, 0, 5px, 17px);
+        }
+
+        .list-layout{
+            @include layout_config(25px,1, 1px, 22px);
+        }
+          
+    }
+
+    .search-filter{
+        flex-basis: 250px;
+        display: flex;
+        justify-content: space-between;
+
+        .search-bar{
+            flex-grow: 1;
+            @include search-bar;
+        }
+
+        .select-box{
+            @include select_box;
+        }
+    }
+}
+
+@media screen and (max-width:850px) {
+    .search-app{
+        width: 100% !important;
+        .search-filter{
+            flex-basis: 100px !important;
+            flex-wrap: wrap;
+            
+            .select-box{
+                select{
+                    width: 185px !important;
+                    position: relative;
+                    left: -3px;
+                }
+            }
+        
+            .search-bar{
+                margin-bottom: 5px;
+            }
+            
+           }
+    }
+   
+}

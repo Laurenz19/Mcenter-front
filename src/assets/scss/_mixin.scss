@@ -1,0 +1,113 @@
+@use "sass:map";
+@use "sass:math";
+
+@mixin buttonMixin($color:#e2e2e2, $outlined:false, $br: false) {
+
+    @if $outlined == true{
+        border: 0.75rem solid $color;
+        color: $color;
+        background-color: #ffff;
+    } @else {
+        border: none;
+        background-color: $color;        
+    }
+
+    @if $br == true{
+        border-radius: 25px;
+    } @else{
+        border-radius: none;
+    }
+
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 10px;
+}
+
+@mixin layout_config($width, $flex-grow, $top, $icon-size) {
+    flex-basis: $width;
+    flex-grow: $flex-grow; 
+    position: relative;
+    top: $top;
+    margin: 0 1px;
+
+    i{
+        font-size: $icon-size;
+    }
+} 
+
+@mixin card($bgColor:rgb(255, 251, 251), $bradius:true) {
+    background-color:$bgColor;
+    box-shadow: $base-box-shadow-1;
+    @if $bradius {
+      border-radius: math.div($base-border-radius,4);   
+    }
+    overflow-y: hidden;
+}
+
+
+@mixin select_box {
+        position: relative;
+        flex-grow: 1;
+
+        select{
+            width: 100px;
+            padding: 2px 10px;
+            margin: 3px;
+            line-height: 20px;
+            font-size: 13px;
+            appearance: none;
+            -webkit-appearance: none;
+            border:1px solid #ccc;
+            border-radius: math.div($base-border-radius,4);
+            background-color: white;
+            color: rgb(47, 47, 47);
+
+            &:focus{
+                border: 1px solid rgb(47, 47, 47);
+                outline: none;
+            }
+        }
+
+        &::after{
+            content: "";
+            position: absolute;
+            right: 12px;
+            top:55%;
+            margin-top: -4px;
+            border-top: 6px solid #ccc;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            pointer-events: none;
+
+        }
+}
+
+@mixin search-bar {
+        position: relative;
+        color: rgb(47, 47, 47);
+
+        input{
+            height: 26px;
+            outline: none;
+            border:1px solid #ccc;
+            border-radius: math.div($base-border-radius,4);
+            position: relative;
+            top:2px;
+            padding: 2px 10px;
+            font-size: 14px;
+
+            &:hover{
+                border: 1px solid rgb(47, 47, 47);
+            }
+        }
+
+        i{
+            font-size: 15px;
+            font-weight: bold;
+            position: absolute;
+            left: 175px;
+            top:5px;
+            background: white;
+            z-index: 1;
+        }
+}

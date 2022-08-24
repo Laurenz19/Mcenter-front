@@ -1,0 +1,249 @@
+
+.admin-container{
+    height: inherit;
+    width: inherit;
+    // background-color: #edf0f8;
+
+    .admin-header{
+        width: 80%;
+        margin: auto;
+        position: relative;
+        top:20px;
+        background-color: white;
+        border-radius: $base-border-radius-1;
+        box-shadow: $base-box-shadow-1;
+        padding: 15px;
+
+        .go_back{
+            cursor: pointer;
+            color: rgb(113, 127, 132);
+            &:hover{
+                color: rgb(0, 123, 255);
+            }
+        }
+    }
+
+    .form_card{
+        width: 80%;
+        margin: auto;
+        top:40px;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        
+        .data_container{
+           width: 75%;
+           flex-grow: 1;
+           display: flex;
+           justify-content: center;
+
+           ul.data{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            width: inherit;
+            display: block;
+
+            li{ 
+                display: block;
+                padding: 15px;
+                margin: 10px;
+                background-color: white;
+                box-shadow: $base-box-shadow-1;
+                border-radius: 10px;
+                cursor: pointer;
+
+                &:hover{
+                    transform: scale(1.02);
+                    transition: transform 0.5s;
+                }
+
+
+                div{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: rgb(58, 65, 69);
+
+                    .delete{
+                        i{
+                            font-size: 18px;
+                        }
+
+                        &:hover{
+                            i{
+                                color: red;
+                                font-size: 20px;
+                                transition: all 0.5s;
+                            }
+                        }
+                    }
+                   
+                }
+            }
+           }
+        }
+
+        .custom_form{
+            width: 50%;
+            flex-grow: 1;          
+         }
+
+    }
+
+    .info{
+      width: 80%;
+      margin: auto;
+      top:40px;
+      position: relative;
+      left: 10px;
+      font-size: 13px;
+
+      span{
+        padding: 1px;
+        background-color: rgb(3, 152, 189);
+        border-radius: 5px;
+        box-shadow: $base-border-radius;
+        color: rgb(150, 177, 189);
+
+        i{
+            color: white;
+        }
+      }
+      
+    //   text-align: center;
+    }
+
+    .admin_card{
+        width: 80%;
+        margin: 30px auto;
+        position: relative;
+        top:40px;
+        background-color: white;
+        border-radius: $base-border-radius;
+        box-shadow: $base-box-shadow-1;
+        padding: 20px 15px;
+
+        h5{
+            position: relative;
+            left: 50px;
+            top:5px;
+        }
+        hr{
+            width: 80%;
+            margin: auto;
+        }
+
+        ul.item{
+          width: 80%;
+          margin: auto;
+          padding: 0px;
+          list-style: none;
+          padding: 15px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          li{
+            display: inline;
+          }
+
+          .field{
+            width: 250px;
+            font-size: 13px;
+            font-weight: bold;
+            color: rgb(138, 153, 162);
+          }
+
+          .value{
+            width: 500px;
+          }
+
+          .actions{
+            font-size: 25px;
+            text-align: center;
+          }
+
+          &:hover{
+            background-color: rgba(193, 197, 200, 0.1);
+          }
+
+        }
+        img{
+            width: 50px;
+        }
+    }
+}
+
+.settings-form{
+
+    .btn-action{
+        position: relative;
+        top:15px;
+    }
+
+    label{
+        color: rgb(95, 113, 117);
+        font-size: 14px;
+    }
+
+    button{
+        @include buttonMixin($br:false);
+        padding: 4px 8px;
+        border-radius: 8px;
+        display:flex;
+        margin: 5px;
+        justify-content: space-around;
+        align-items: center;
+        // box-shadow: $base-box-shadow-1;
+        background-color: white;
+        
+        i{
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        span{
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        &:hover{
+            box-shadow: $base-box-shadow-1; 
+            color:#003363
+        }
+    }
+}
+
+.table_actions{
+    display: flex;
+    justify-content: center;
+    span{
+        background-color: white;
+        margin: 0px 5px;
+        padding: 6px 7px;
+        box-shadow: $base-box-shadow-1;
+        border-radius: 5px;
+        cursor: pointer;
+
+
+        &:hover{
+            transform: scale(1.1);
+            transition-duration: 1s;
+        }
+    }
+}
+
+
+table{
+    td, th{
+        text-align: center;
+    }
+}
+
+.space{
+    height: 6vh;
+}
+

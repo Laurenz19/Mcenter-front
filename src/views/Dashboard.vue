@@ -12,12 +12,21 @@
 <script>
 import HeaderComponentVue from '@/components/HeaderComponent.vue'
 import NavbarComponentVue from '@/components/NavbarComponent.vue'
+import { inject } from 'vue'
+
 
    export default {
-    name:"DefaultPage",
+    name:"DashboardPage",
     components:{
         'app-navbar':NavbarComponentVue,
         'app-header': HeaderComponentVue
+    }, 
+    setup(){
+       let globalVar=inject('globalVariable')
+        console.log(globalVar)
+        return {
+
+        }
     }
    }
 </script>
@@ -28,7 +37,7 @@ import NavbarComponentVue from '@/components/NavbarComponent.vue'
         justify-content: space-between;
 
         .navbar{
-            flex-basis: 200px;
+            flex-basis: 150px;
             flex-grow: 1;
             // border-right: 1px solid grey;
             box-shadow: 3px 3px 15px 0px rgba(42, 43, 53, 0.1);
@@ -90,24 +99,25 @@ import NavbarComponentVue from '@/components/NavbarComponent.vue'
                         }
 
                         i{
+                            color: black;
                             font-size: 20px;
                             font-weight: bold;
                         }
                     }
 
-                    .active{
-                        // background-color: white;
+                    // .active{
+                    //     // background-color: white;
 
-                        .menu_icon{
-                            background-color: #02718A;
-                            color: white;
-                        }
+                    //     .menu_icon{
+                    //         background-color: #02718A;
+                    //         color: white;
+                    //     }
 
-                        .menu_label{
-                            color: #3f5053;
-                            font-weight: bold;
-                        }
-                    } 
+                    //     .menu_label{
+                    //         color: #3f5053;
+                    //         font-weight: bold;
+                    //     }
+                    // } 
                 }
             }
         }
@@ -148,6 +158,7 @@ import NavbarComponentVue from '@/components/NavbarComponent.vue'
 
             .app{
                 margin: 15px;
+                padding: 15px;
             }
 
         }

@@ -15,6 +15,13 @@
    }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+    li{
+        color: white;
 
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
 </style>

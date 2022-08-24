@@ -1,0 +1,41 @@
+%btn-pagination{
+    flex-basis: 35px;
+    height: 35px;
+    background-color: white;
+    box-shadow: $base-box-shadow-1;
+    border-radius: 5px;
+    font-size: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.pagination{
+    width: 50%;
+    margin: 0 auto;
+    
+    .pagination-content{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        font-weight: bold;
+        text-align: center;
+
+        .previous-btn{
+            @extend %btn-pagination;
+        }
+
+        .current-page{
+            @extend %btn-pagination;
+            height: 30px;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+
+        .next-btn{
+            @extend %btn-pagination;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$base-font-family:'Roboto', sans-serif;
+$base-box-shadow: 3px 3px 15px 0px rgba(42, 43, 53, 0.25);
+$base-box-shadow-1: 3px 3px 15px 0px rgba(42, 43, 53, 0.15);
+$base-border-radius: 20px;
+$base-border-radius-1: 15px;
+
+
+/* break point */
+$screen-sizes:(
+    "xs": 0,
+    "sm": 480px,
+    "md": 720px,
+    "lg": 960px,
+    "xl": 1200px
+);
+
+
+/* Grid Column */
+$grid-columns: 12;
+
+$grid-gaps:(
+    "0":0,
+    "1":10px,
+    "2":20px,
+    "3":30px
+);
+
+@each $key, $val in $grid-gaps {
+    .grid-#{$key} > *{
+        padding: $val;
+    }
+
+    .grid-#{$key}{
+       margin-left: -$val;
+       margin-right: -$val;
+    }
+}

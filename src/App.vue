@@ -1,21 +1,19 @@
 <template>
   <div id="app">
-    <app-page></app-page>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import AppPageVue from './views/AppPage.vue'
 
 export default {
   name: 'App',
-  components: {
-    "app-page": AppPageVue,
-}
 }
 </script>
 
-<style>
+<style lang="scss">
+
+@import './assets/scss/index.scss';
 
 body{
   margin: 0%;
@@ -28,5 +26,10 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   position: relative;
+}
+
+input:hover{
+  border-color: #02718A !important;
+  outline: none !important;
 }
 </style>

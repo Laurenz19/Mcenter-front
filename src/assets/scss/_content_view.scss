@@ -1,0 +1,78 @@
+.actions-collapse{
+    display: flex;
+    justify-content: flex-end;
+    padding:8px;
+}
+.btn-collapse{
+    font-weight: bold;
+    color: rgb(88, 88, 102);
+    font-size: 13px;
+    margin-left: 8px;  
+}
+
+.add{
+    &:hover{
+        color:rgb(121, 121, 253);
+        transition: all 0.5s ease-in forwards;
+    }
+
+    &:not(:hover){
+         color: rgb(88, 88, 102);
+        transition: all 0.5s ease-in forwards;
+    }
+}
+
+.delete{
+    &:hover{
+        color:red;
+        transition: all 0.5s ease-in forwards;
+    }
+
+    &:not(:hover){
+       color: rgb(88, 88, 102);
+       transition: all 0.5s ease-in forwards;
+   }
+}
+
+
+.edit{
+    &:hover{
+        color:rgb(186, 222, 42);
+        transition: all 0.5s ease-in forwards;
+    }
+
+    &:not(:hover){
+       color: rgb(88, 88, 102);
+       transition: all 0.5s ease-in forwards;
+   }
+}
+
+.content-item{
+    margin:10px;
+    padding: 8px;
+
+    p{
+        font-size: 13px;
+    }
+
+    &:hover{
+        border:1px solid rgb(232, 232, 232);
+    }
+
+    .content-inner{
+        display:flex;
+        justify-content: space-around;
+        padding: 2px;
+        margin: 15px;
+
+        video{
+            // width:50%;
+            // margin: 5px auto;
+            display: block;
+        }
+        p{
+            font-size:13px;
+            flex-basis:500px;
+        }
+    }
+}

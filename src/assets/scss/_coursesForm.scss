@@ -1,0 +1,286 @@
+@use "sass:math";
+
+.header{
+    display: flex;
+    margin:15px;
+    justify-content: space-between;
+
+    h2{
+        font-size: 20px;
+        position: relative;
+        top:5px;
+    }
+    .actions{
+        flex-basis: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        top:4px;
+
+        span{
+            display:block;
+        }
+        button{
+            @include buttonMixin($br:false);
+            padding: 3px 10px;
+            border-radius: 8px;
+            display:flex;
+            // box-shadow: $base-box-shadow-1;
+            background-color: white;
+            
+            i{
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            span{
+                font-weight: 400;
+                font-size: 14px;
+            }
+
+            &:hover{
+                box-shadow: $base-box-shadow-1; 
+                color:#003363
+            }
+        }
+
+        div{
+            flex-basis: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            // position: relative;
+        }
+
+        span{
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+}
+
+.course-add-form{
+    width: 100%;
+    @include card(rgb(255, 255, 255), false);
+    // position:fixed;
+    overflow: hidden;
+
+    h3{
+        position: relative;
+        left:50px;
+        margin: 15px;
+        font-size: 17px;
+    }
+
+    hr{
+        width:90%;
+        border: 0;
+        border-top: 1px solid rgb(0, 32, 64);
+        position: relative;
+        left:55px;
+        top:-10px;
+        margin: 0px 15px;
+
+    }
+
+    .form{
+        width: 85%;
+        margin: 15px auto;
+
+        .error{
+            position: relative;
+            left:40%;
+        }
+
+       
+
+        .btn-action{
+            button{
+                @include buttonMixin($br:false);
+                font-size: 13px;
+                border-radius: 7px;
+                margin: 10px 5px;
+                padding: 4px 7px;
+                box-shadow: $base-box-shadow-1;
+                color: white;
+                background-color: white;
+                text-align:center;
+    
+                &:hover{
+                    box-shadow: $base-box-shadow;
+                }
+            }
+
+            // .cancel-btn{
+            //     background-color: #133c55;
+            // }
+
+            // .save-btn{
+            //     background-color: #105EA7;
+            // }
+        }
+
+        .app-input-content{
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+            label{
+                flex-basis: 125px;
+                flex-grow: 1;
+                font-size: 15px;
+            }
+            span{
+                flex-grow: 0;
+                flex-basis: 50px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin: 0 5px;
+                
+                i{
+                    margin: 0 10px;
+                    font-size: 15px;
+                }
+            }
+            .type{
+                flex-grow: 1;
+                flex-basis: 400px;
+                position: relative;
+
+                .type_select{
+                  @include select_box;
+                  position: absolute;
+                  top:-15px;
+                  left: -3px;
+
+                  select{
+                    padding: 1px 5px !important;
+                    width: 125px;
+                    border-radius: math.div($base-border-radius, 4);
+
+                    &:focus{
+                        border: 1px solid rgb(47, 47, 47);
+                        outline:auto;
+                    }
+                  }
+                }
+
+                .type_text{
+                    width: inherit;
+                    position: relative;
+                    input{
+                        width: 100%;
+                        height: 27px;
+                        font-size: 14px;
+                        padding: 5px;
+                        border: 1px solid rgb(210, 210, 210);
+                        border-radius: math.div($base-border-radius, 4);
+                    }
+                }
+
+                .type_duree{
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    .debut{
+                        flex-basis: 200px;
+
+                        label{
+                            display: block;
+                            font-size: 12px;
+                        }
+
+                        // input{
+                        //     width: 100%;
+                        //     padding: 0 10px;
+                        //     font-size: 13px;
+                        // }
+
+                        input{
+                            width: 100%;
+                            height: 27px;
+                            font-size: 13px;
+                            padding: 5px;
+                            border: 1px solid rgb(223, 223, 223);
+                            border-radius: math.div($base-border-radius, 4);
+                        }
+                    }
+
+                    .fin{
+                        flex-basis: 200px;
+
+                        label{
+                            display: block;
+                            font-size: 12px;
+                        }
+
+                        input{
+                            width: 100%;
+                            height: 27px;
+                            font-size: 13px;
+                            padding: 5px;
+                            border: 1px solid rgb(223, 223, 223);
+                            border-radius: math.div($base-border-radius, 4);
+                        }
+
+                        .label{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            input{
+                                height:10px;
+                                width:10px;
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+        }
+    }
+
+}
+
+.iteams_form{
+    .title{
+        position: relative;
+        left:-8%;
+        hr{
+            width: 100%;
+        }
+    }
+    .form-group{
+        margin:10px;
+
+        label{
+            font-size: 13px;
+        }
+    }
+}
+
+.duree{
+    display: flex;
+
+    *{
+        flex-grow: 1;
+    }
+}
+
+.dureeCours{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    *{
+        flex-grow: 1;
+    }
+}
+.btn-action{
+    button{
+        i{
+            margin-right: 0px !important;
+        }
+        padding: 5px 7px;
+    }
+}

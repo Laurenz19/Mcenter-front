@@ -1,0 +1,165 @@
+@use "sass:math";
+.course-preview{
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.course-overview{
+    margin-top:25px;
+    display: flex;
+    justify-content: space-around;
+    width: 95%;
+    margin: auto;
+    
+    img{
+        flex-basis: 335px;
+        // width:275px;
+        height: 175px;
+        box-shadow: $base-box-shadow;
+        border-radius: 5px;
+    }
+
+    .description{
+        flex-basis: 835px;
+        border: 1px solid rgb(203, 203, 203) ;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: $base-box-shadow-1;
+
+        .desc-content{
+            text-align: justify;
+            margin: 5px;
+            font-size: 13px;
+        }
+
+        .btn-actions{
+            position: relative;
+            left:5px;
+            
+
+            button{
+                @include buttonMixin($br:false);
+                padding: 4px 10px;
+                border-radius: 8px;
+                display:flex;
+                // box-shadow: $base-box-shadow-1;
+                background-color: white;
+                // color: ;
+                
+                i{
+                    font-weight: bold;
+                    font-size: 15px;
+                }
+    
+                span{
+                    font-weight: 400;
+                    font-size: 13px;
+                    margin: 5px;
+                }
+    
+                &:hover{
+                    box-shadow: $base-box-shadow-1; 
+                }
+            }
+
+            button{
+                margin: 5px;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.main-content{
+    // @include card($bradius:false);
+    border-top: 1px solid rgb(197, 197, 197);
+    margin-top: 15px;
+    // background-color: white;
+   
+
+    .main-content-inner{
+        display: flex;
+        justify-content: space-between;
+        @extend .course-preview;
+        padding: 0.75rem 3rem ;
+        // border: 1px solid black;
+        
+
+        .content-card{
+            flex-basis: 700px;
+            flex-grow: 1;
+            @include card($bradius:true, $bgColor:white);
+
+            .header{
+                padding: 10px;
+                margin: 0px;
+                font-size: 17px;
+                font-weight:bold;
+                text-align: center;
+                width: 100%;
+            }
+         }
+     
+        .partie-list{
+             flex-basis: 300px;
+             flex-grow: 1;
+            //  border: 1px solid black;
+             display: flex;
+             justify-content: center;
+             flex-wrap: wrap;
+
+             .list-inner{
+                padding: 5px;
+                // border: 1px solid black;
+                width: 90%;
+                margin: 0 auto;
+                // display: flex;
+                // flex-wrap: wrap;
+                // justify-content: center;
+
+                .search-bar{
+                    @include search-bar;
+                    width: 65%;
+                    margin: 0 auto;
+                }
+
+                .all-parties{
+                    padding: 5px;
+                    font-size: 14px;
+                    text-align: center;
+
+                    .partie{
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: white;
+                        box-shadow: $base-box-shadow-1;
+                        margin: 5px;
+                        padding: 5px;
+                        border-radius: math.div($base-border-radius, 4);
+
+                        span{
+                            flex-basis:100px;
+                        }
+
+                        .actions{
+                            flex-basis:100px;
+
+                            i{
+                                margin: 0 5px;
+
+                                &:hover{
+                                    color: #4bb2fb;
+                                }
+                            }
+                        }
+                    }
+                }
+             }
+         }
+        
+    }
+
+ }
