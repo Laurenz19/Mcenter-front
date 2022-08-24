@@ -9,7 +9,7 @@
           </app-filter>
           <div class="app_card_list">
             <div class="visit_card" v-for="visit in visibleData" :key="visit.id">
-                <div class="item"><span>{{visit.date}}</span></div>
+                <div class="item"><span>{{moment(visit.date).format("MMMM Do YYYY")}}</span></div>
                 <div class="visitcontainer"> 
                     <div class="field">
                        <div class="title">Doctor</div>
@@ -29,8 +29,8 @@
                 </div>
                 <hr>
                 <div class="actions">
-                    <i class="uil uil-edit"></i>
-                    <i class="uil uil-trash"></i>
+                   <i class="uil uil-edit" @click="editData(visit)"></i>
+                    <i class="uil uil-trash" @click="deleteData(visit.id)"></i>
                 </div>
             </div>
           </div>
@@ -41,23 +41,20 @@
             <template #content>
                 <form action="">
                    <div class="input">
-                     <label for="">Nom</label>
-                     <input type="text" v-model="firstname" placeholder="Nom" :style="{outline:'none', border:'1px solid grey'}">
+                     <label for="">Doctor</label>
+                      <select v-model="selected_doctor">
+                        <option :value="doctor['@id']" v-for="doctor in doctors" :key="doctor.id">{{doctor.lastname}} {{doctor.firstname}}</option>
+                      </select>
                    </div>
                     <div class="input">
-                     <label for="">Prénoms</label>
-                     <input type="text" v-model="lastname" placeholder="Prénoms" :style="{outline:'none', border:'1px solid grey'}">
+                     <label for="">Patient</label>
+                       <select v-model="selected_patient">
+                        <option :value="patient['@id']" v-for="patient in patients" :key="patient.id">{{patient.lastname}} {{patient.firstname}}</option>
+                      </select>
                    </div>
                    <div class="input">
-                     <label for="">Genre</label>
-                     <select v-model="gender">
-                       <option value="M">Homme</option>
-                       <option value="F">Femme</option>
-                     </select>
-                   </div>
-                   <div class="input">
-                     <label for="">Adrèsse</label>
-                     <input type="text" v-model="address" placeholder="Tanambao" :style="{outline:'none', border:'1px solid grey'}">
+                     <label for="">Date</label>
+                     <input type="date" v-model="date">
                    </div>
                 </form>
             
@@ -74,6 +71,7 @@ import DashboardPage from './Dashboard.vue'
 import PaginationComponentVue from '@/components/utils/PaginationComponent.vue';
 import FilterSearchComponentVue from '@/components/utils/FilterSearchComponent.vue';
 import ModalComponentVue from '@/components/utils/ModalComponent.vue';
+import moment from 'moment';
 import readData from '../services/read'
 import createData from '@/services/create';
 import removeData from '@/services/delete';
@@ -107,22 +105,22 @@ import updateData from '@/services/update';
         let colors = ref(globalVariable.colors)
         let isModalOpen = ref(false)
         let btnText = ref('Valider')
-        let firstname = ref('')
-        let lastname = ref('')
-        let gender = ref('')
-        let address = ref('')
         let userSearch = ref('')
+        let selected_doctor = ref('')
+        let selected_patient = ref('')
+        let date = ref('')
+        let doctors = ref([])
+        let patients = ref([])
 
         onBeforeMount(() => {
            loadData()
         })
 
-        let editData = (patient)=>{
-            gender.value = patient.gender
-            firstname.value= patient.firstname
-            lastname.value= patient.lastname
-            address.value= patient.address
-            id.value = patient.id
+        let editData = (visit)=>{
+            selected_doctor.value = visit.medecin['@id']
+            selected_patient.value = visit.patient['@id']
+            date.value= moment(visit.date).format("YYYY-MM-DD")
+            id.value = visit.id
             btnText.value = 'Modifier'
             isModalOpen.value= true
 
@@ -138,9 +136,23 @@ import updateData from '@/services/update';
                     data.value=visits.value
                 }
             })
+            readData('/api/doctors', (response)=>{
+                console.log(response.data['hydra:member'])
+                if(response.status == 200){
+                    doctors.value = response.data['hydra:member']
+                }
+            })
+
+            readData('/api/patients', (response)=>{
+                console.log(response.data['hydra:member'])
+                if(response.status == 200){
+                    patients.value = response.data['hydra:member']
+                }
+            })
         }
 
         let deleteData = (id)=>{
+            console.log(id)
             removeData(`/api/visits/${id}`, (response)=>{
                 console.log(response)
                 if(response.status == 204){
@@ -150,36 +162,33 @@ import updateData from '@/services/update';
         }
 
         let toggleSaveData = ()=>{
-            let patient = {
-                "firstname": firstname.value,
-                "lastname": lastname.value,
-                "gender": gender.value,
-                "address": address.value,
+            let visit = {
+                "medecin": selected_doctor.value,
+                "patient": selected_patient.value,
+                "date": new Date(date.value)
             }
+            
 
             if(btnText.value == 'Valider'){
-                console.log(patient)
-                createData('/api/patients', patient, (response)=>{
+               
+                createData('/api/visits', visit, (response)=>{
                     console.log(response)
                     if(response.status == 201){
                         loadData()
-                        gender.value = ''
-                        firstname.value=''
-                        lastname.value=''
-                        address.value=''
+                        selected_doctor.value=''
+                        selected_patient.value=''
+                        date.value = ''
+                        
                     }
                     
                 })
             }else{
-                console.log(patient)
-                updateData(`/api/patients/${id.value}`, patient, (response)=>{
+               
+                updateData(`/api/visits/${id.value}`, visit, (response)=>{
                     console.log(response)
                      if(response.status == 200){
                         loadData()
-                        gender.value = ''
-                        firstname.value=''
-                        lastname.value=''
-                        address.value=''
+                      
                         id.value = ''
                     }
                 })
@@ -226,8 +235,9 @@ import updateData from '@/services/update';
 
         return{
             data, paginationConfig, colors, isModalOpen, btnText, editData
-            , deleteData, toggleSaveData, firstname, lastname, visits, gender, address,
-            visibleData, updatePage, userSearch, getuserSearch,
+            , deleteData, toggleSaveData, visits,
+            visibleData, updatePage, userSearch, getuserSearch, selected_doctor, doctors, patients,
+            selected_patient, date, moment
             
         }
     }
@@ -246,12 +256,12 @@ import updateData from '@/services/update';
     .visit_card{
         background-color: white;
         box-shadow: 3px 3px 15px 0px rgba(42, 43, 53, 0.15);
-        flex-grow: 1;
+        // flex-grow: 1;
         margin: 15px;
         cursor: pointer;
         border-radius: 10px;
         padding: 15px;
-        flex-basis: 300px;
+        width: 500px;
 
         &:hover{
             transform: scale(1.05);
