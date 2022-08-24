@@ -70,6 +70,7 @@ import readData from '../services/read'
 import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
+import useNotification from '@/composable/useNotification';
 
    export default {
     name:"PatientPage",
@@ -137,6 +138,11 @@ import updateData from '@/services/update';
                 console.log(response)
                 if(response.status == 204){
                     loadData()
+                    useNotification('warning', 'Suppréssion éffectuée!')
+                }
+
+                if(response.status == 500){
+                     useNotification('error', 'Impossible à supprimer!')
                 }
             })
         }
@@ -149,12 +155,17 @@ import updateData from '@/services/update';
                 "address": address.value,
             }
 
-            if(btnText.value == 'Valider'){
+            if(firstname.value == '' || lastname.value == '' || gender.value == '' || address.value == ''){
+                useNotification('warning', 'Veuillez remplir correctement les champs!')
+            }else{
+                if(btnText.value == 'Valider'){
                 console.log(patient)
                 createData('/api/patients', patient, (response)=>{
                     console.log(response)
                     if(response.status == 201){
                         loadData()
+                        useNotification('success', 'Ajout éffectué avec succès')
+                        isModalOpen.value= false
                         gender.value = ''
                         firstname.value=''
                         lastname.value=''
@@ -168,6 +179,8 @@ import updateData from '@/services/update';
                     console.log(response)
                      if(response.status == 200){
                         loadData()
+                        useNotification('success', 'Modification éffectuée avec succès')
+                        isModalOpen.value= false
                         gender.value = ''
                         firstname.value=''
                         lastname.value=''
@@ -176,6 +189,9 @@ import updateData from '@/services/update';
                     }
                 })
             }
+            }
+
+            
         }
 
          let updatePage = function(pageNumber){

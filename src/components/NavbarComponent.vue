@@ -62,7 +62,7 @@
 
 <style lang="scss">
     .menu_item{
-        .router-link-active {
+        .router-link-exact-active {
              color: #3f5053;
              font-weight: bold;
 

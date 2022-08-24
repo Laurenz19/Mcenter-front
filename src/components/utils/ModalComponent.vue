@@ -56,7 +56,7 @@ export default{
 
         let toggleSave = ()=>{
             ctx.emit('save')
-            toggleCloseModal()
+            // toggleCloseModal()
         }
 
         return{

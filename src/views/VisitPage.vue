@@ -76,6 +76,7 @@ import readData from '../services/read'
 import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
+import useNotification from '@/composable/useNotification';
 
    export default {
     name:"VisitPage",
@@ -157,6 +158,7 @@ import updateData from '@/services/update';
                 console.log(response)
                 if(response.status == 204){
                     loadData()
+                    useNotification('warning', 'Suppréssion éffectuée!')
                 }
             })
         }
@@ -168,13 +170,18 @@ import updateData from '@/services/update';
                 "date": new Date(date.value)
             }
             
-
-            if(btnText.value == 'Valider'){
+            
+            if(selected_doctor.value == '' || selected_patient.value == '' || date.value == ''){
+                 useNotification('warning', 'Veuillez remplir correctement les champs!')
+            }else{
+                if(btnText.value == 'Valider'){
                
                 createData('/api/visits', visit, (response)=>{
                     console.log(response)
                     if(response.status == 201){
                         loadData()
+                        useNotification('success', 'Ajout éffectué avec succès')
+                        isModalOpen.value= false
                         selected_doctor.value=''
                         selected_patient.value=''
                         date.value = ''
@@ -188,11 +195,17 @@ import updateData from '@/services/update';
                     console.log(response)
                      if(response.status == 200){
                         loadData()
-                      
+                        useNotification('success', 'Modification éffectuée avec succès')
+                        isModalOpen.value= false
+                        selected_doctor.value=''
+                        selected_patient.value=''
+                        date.value = ''
                         id.value = ''
                     }
                 })
             }
+            }
+            
         }
 
          let updatePage = function(pageNumber){

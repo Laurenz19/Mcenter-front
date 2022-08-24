@@ -105,19 +105,6 @@ import { inject } from 'vue'
                         }
                     }
 
-                    // .active{
-                    //     // background-color: white;
-
-                    //     .menu_icon{
-                    //         background-color: #02718A;
-                    //         color: white;
-                    //     }
-
-                    //     .menu_label{
-                    //         color: #3f5053;
-                    //         font-weight: bold;
-                    //     }
-                    // } 
                 }
             }
         }

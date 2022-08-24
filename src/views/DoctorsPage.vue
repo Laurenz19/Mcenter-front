@@ -50,8 +50,6 @@
                 </form>
             
             </template>
-          
-          
           </app-modal>
         </template>
     </dashboard>
@@ -67,6 +65,7 @@ import readData from '../services/read'
 import createData from '@/services/create';
 import removeData from '@/services/delete';
 import updateData from '@/services/update';
+import useNotification from '../composable/useNotification'
 
    export default {
     name:"DoctorsPage",
@@ -87,7 +86,7 @@ import updateData from '@/services/update';
 
         let paginationConfig = ref({
                 current:0,
-                size:4,
+                size:5,
                 data: [],
                 _data: []
         })
@@ -134,6 +133,11 @@ import updateData from '@/services/update';
                 console.log(response)
                 if(response.status == 204){
                     loadData()
+                    useNotification('warning', 'Suppréssion éffectuée!')
+                }
+
+                if(response.status == 500){
+                     useNotification('error', 'Impossible à supprimer!')
                 }
             })
         }
@@ -146,12 +150,17 @@ import updateData from '@/services/update';
                 grade: grade.value
             }
 
-            if(btnText.value == 'Valider'){
+            if(code.value == '' || firstname.value == '' || lastname.value == '' || grade.value == ''){
+                useNotification('warning', 'Veuillez remplir correctement les champs!')
+            }else{
+                 if(btnText.value == 'Valider'){
                 console.log(doctor)
                 createData('/api/doctors', doctor, (response)=>{
                     console.log(response)
                     if(response.status == 201){
                         loadData()
+                        useNotification('success', 'Ajout éffectué avec succès')
+                        isModalOpen.value= false
                         code.value = ''
                         firstname.value=''
                         lastname.value=''
@@ -165,6 +174,8 @@ import updateData from '@/services/update';
                     console.log(response)
                      if(response.status == 200){
                         loadData()
+                        useNotification('success', 'Modification éffectuée avec succès')
+                        isModalOpen.value= false
                         code.value = ''
                         firstname.value=''
                         lastname.value=''
@@ -173,6 +184,9 @@ import updateData from '@/services/update';
                     }
                 })
             }
+            }
+
+           
         }
 
          let updatePage = function(pageNumber){
